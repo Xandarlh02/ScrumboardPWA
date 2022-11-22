@@ -25,15 +25,15 @@ import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { FileUploadComponent } from './file-upload/file-upload.component';
 import { environment } from '../environments/environment';
+import { ScrumboardComponent } from './scrumboard/scrumboard.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    FileUploadComponent
+    ScrumboardComponent,
   ],
   imports: [
     BrowserModule,
