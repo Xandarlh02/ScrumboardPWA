@@ -7,10 +7,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ScrumboardApiContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ScrumboardApiContext") ?? throw new InvalidOperationException("Connection string 'ScrumboardApiContext' not found.")));
 
+// Add policy
+builder.Services.AddCors(options =>
+{
+	options.AddDefaultPolicy(policy =>
+	{
+		policy.AllowAnyOrigin() // or AllowAnyOrigin()
+		.AllowAnyHeader()
+		.AllowAnyMethod()
+		.AllowAnyOrigin();
+	});
+});
 
 // Add services to the container.
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -22,6 +32,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Enable policy
+app.UseCors();
 
 app.UseHttpsRedirection();
 
