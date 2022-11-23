@@ -14,19 +14,18 @@ namespace ScrumboardApi.Data
             : base(options)
         {
         }
-		//protected override void OnModelCreating(ModelBuilder modelBuilder)
-		//{
-		//	modelBuilder
-		//		.Entity<Board>()
-		//		.HasMany(e => e.Columns)
-		//		.OnDelete(DeleteBehavior.ClientCascade);
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<Board>()
+                .HasMany(e => e.Columns);
 
-  //          modelBuilder.Entity<Column>()
-  //              .HasMany(e => e.Assignments)
-		//		.OnDelete(DeleteBehavior.ClientCascade); 
-		//}
+            modelBuilder
+                .Entity<Column>()
+                .HasMany(e => e.Assignments);
+        }
 
-		public DbSet<ScrumboardApi.Models.Board> Board { get; set; } = default!;
+        public DbSet<ScrumboardApi.Models.Board> Board { get; set; } = default!;
 
         public DbSet<ScrumboardApi.Models.Column> Column { get; set; }
 

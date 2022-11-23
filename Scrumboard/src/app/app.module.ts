@@ -25,9 +25,9 @@ import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { environment } from '../environments/environment';
 import { ScrumboardComponent } from './scrumboard/scrumboard.component';
 
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -58,7 +58,6 @@ import { ScrumboardComponent } from './scrumboard/scrumboard.component';
 
 
     HttpClientModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent]

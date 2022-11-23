@@ -1,3 +1,4 @@
+import { BoardService } from './../../services/board.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScrumboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private boardService: BoardService) { }
 
   ngOnInit(): void {
+    this.boardService.GetBoard().subscribe( e =>{
+      console.log(e)
+    })
   }
 
 }
