@@ -45,11 +45,9 @@ namespace ScrumboardApi.Controllers
         // PUT: api/Boards/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBoard(int id, Column column)
+        public async Task<IActionResult> PutBoard(int id, Board board)
         {
-			var board = _context.Board.FirstOrDefault(e => e.Id == id);
-      	
-			if (id != board.Id)
+            if (id != board.Id)
             {
                 return BadRequest();
             }
@@ -58,7 +56,6 @@ namespace ScrumboardApi.Controllers
 
             try
             {
-                board.Columns.Add(column);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
