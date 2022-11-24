@@ -1,5 +1,8 @@
 import { BoardService } from './../../services/board.service';
 import { Component, OnInit } from '@angular/core';
+import {TreeNode} from 'primeng/api';
+import {TreeDragDropService} from 'primeng/api';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-scrumboard',

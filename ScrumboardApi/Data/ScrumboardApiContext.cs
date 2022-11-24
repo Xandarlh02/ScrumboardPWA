@@ -30,5 +30,7 @@ namespace ScrumboardApi.Data
         public DbSet<ScrumboardApi.Models.Column> Column { get; set; }
 
         public DbSet<ScrumboardApi.Models.Assignment> Assignment { get; set; }
+
+        public DbSet<ScrumboardApi.Models.User> User { get; set; }
     }
 }

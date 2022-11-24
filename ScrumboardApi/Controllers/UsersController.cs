@@ -12,47 +12,47 @@ namespace ScrumboardApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BoardsController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly ScrumboardApiContext _context;
 
-        public BoardsController(ScrumboardApiContext context)
+        public UsersController(ScrumboardApiContext context)
         {
             _context = context;
         }
 
-        // GET: api/Boards
+        // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Board>>> GetBoard()
+        public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
-            return await _context.Board.Include(e => e.Columns).ThenInclude(e => e.Assignments).ThenInclude(e => e.Users).ToListAsync();
+            return await _context.User.ToListAsync();
         }
 
-        // GET: api/Boards/5
+        // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Board>> GetBoard(int id)
+        public async Task<ActionResult<User>> GetUser(int id)
         {
-            var board = _context.Board.Include(e => e.Columns).ThenInclude(e => e.Assignments).ThenInclude(e => e.Users).FirstOrDefault(e => e.Id == id);
+            var user = await _context.User.FindAsync(id);
 
-            if (board == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return board;
+            return user;
         }
 
-        // PUT: api/Boards/5
+        // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBoard(int id, Board board)
+        public async Task<IActionResult> PutUser(int id, User user)
         {
-            if (id != board.Id)
+            if (id != user.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(board).State = EntityState.Modified;
+            _context.Entry(user).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace ScrumboardApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BoardExists(id))
+                if (!UserExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace ScrumboardApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Boards
+        // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Board>> PostBoard(Board board)
+        public async Task<ActionResult<User>> PostUser(User user)
         {
-            _context.Board.Add(board);
+            _context.User.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBoard", new { id = board.Id }, board);
+            return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
-        // DELETE: api/Boards/5
+        // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBoard(int id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
-            var board = await _context.Board.FindAsync(id);
-            if (board == null)
+            var user = await _context.User.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            _context.Board.Remove(board);
+            _context.User.Remove(user);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool BoardExists(int id)
+        private bool UserExists(int id)
         {
-            return _context.Board.Any(e => e.Id == id);
+            return _context.User.Any(e => e.Id == id);
         }
     }
 }
