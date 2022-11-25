@@ -14,9 +14,10 @@ export class ScrumboardComponent implements OnInit {
   constructor(private boardService: BoardService) { }
 
   ngOnInit(): void {
-    this.boardService.GetBoard().subscribe( e =>{
+    this.boardService.GetBoard(3).subscribe( e => {
       console.log(e)
     })
+    
   }
 
 }

@@ -8,12 +8,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class BoardService {
 
-  url = "https://localhost:7182/api/"
+  url = "https://localhost:7182/api/Boards/"
 
   constructor(private http: HttpClient) { }
 
 
-  GetBoard():Observable<Board>{
-    return this.http.get<Board>(this.url + 'Boards/3')
+  GetBoard(id:number):Observable<Board>{
+    return this.http.get<Board>(this.url + id)
   }
+
 }

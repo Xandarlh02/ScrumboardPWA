@@ -1,0 +1,18 @@
+import { Assignment } from './../models/assignment';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AssignmentService {
+
+  url = "https://localhost:7182/api/Assignments/"
+
+  constructor(private http: HttpClient) { }
+
+  // PostAssignmentToColumn():Observable<Assignment>{
+  //   return this.http.post<Assignment>(this.url + )
+  // }
+}

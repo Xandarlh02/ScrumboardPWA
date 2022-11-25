@@ -21,21 +21,23 @@ namespace ScrumboardApi.Controllers
             _context = context;
         }
 
-        // GET: api/Boards
+        // GET: api/Boards - Get all boards
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Board>>> GetBoard()
         {
-            return await _context.Board.Include(e => e.Columns)
+            return await _context.Board
+                .Include(e => e.Columns)
                 .ThenInclude(e => e.Assignments)
                 .ThenInclude(e => e.Users)
                 .ToListAsync();
         }
 
-        // GET: api/Boards/5
+        // GET: api/Boards/5 - Get specific board on Id
         [HttpGet("{id}")]
         public async Task<ActionResult<Board>> GetBoard(int id)
         {
-            var board = _context.Board.Include(e => e.Columns)
+            var board = _context.Board
+                .Include(e => e.Columns)
                 .ThenInclude(e => e.Assignments)
                 .ThenInclude(e => e.Users)
                 .FirstOrDefault(e => e.Id == id);
@@ -91,8 +93,8 @@ namespace ScrumboardApi.Controllers
         }
 
 
-		// DELETE: api/Boards/5
-		[HttpDelete("{id}")]
+        // DELETE: api/Boards/5
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBoard(int id)
         {
             var board = await _context.Board.FindAsync(id);

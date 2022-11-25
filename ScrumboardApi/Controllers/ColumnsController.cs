@@ -25,14 +25,20 @@ namespace ScrumboardApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Column>>> GetColumn()
         {
-            return await _context.Column.ToListAsync();
+            return await _context.Column
+                .Include(e => e.Assignments)
+                .ThenInclude(e => e.Users)
+                .ToListAsync();
         }
 
         // GET: api/Columns/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Column>> GetColumn(int id)
         {
-            var column = await _context.Column.FindAsync(id);
+            var column = _context.Column
+                .Include(e => e.Assignments)
+                .ThenInclude(e => e.Users)
+                .FirstOrDefault(e => e.Id == id);
 
             if (column == null)
             {
