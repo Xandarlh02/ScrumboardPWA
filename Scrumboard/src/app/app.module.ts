@@ -20,6 +20,9 @@ import {FileUploadModule} from 'primeng/fileupload';
 import {ImageModule} from 'primeng/image';
 import {DialogModule} from 'primeng/dialog';
 import {InputTextModule} from 'primeng/inputtext';
+import {TreeNode} from 'primeng/api';
+import {TreeDragDropService} from 'primeng/api';
+import {MessageService} from 'primeng/api';
 
 import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';

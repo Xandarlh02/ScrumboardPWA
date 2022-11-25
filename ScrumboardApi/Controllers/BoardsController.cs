@@ -25,14 +25,20 @@ namespace ScrumboardApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Board>>> GetBoard()
         {
-            return await _context.Board.Include(e => e.Columns).ThenInclude(e => e.Assignments).ThenInclude(e => e.Users).ToListAsync();
+            return await _context.Board.Include(e => e.Columns)
+                .ThenInclude(e => e.Assignments)
+                .ThenInclude(e => e.Users)
+                .ToListAsync();
         }
 
         // GET: api/Boards/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Board>> GetBoard(int id)
         {
-            var board = _context.Board.Include(e => e.Columns).ThenInclude(e => e.Assignments).ThenInclude(e => e.Users).FirstOrDefault(e => e.Id == id);
+            var board = _context.Board.Include(e => e.Columns)
+                .ThenInclude(e => e.Assignments)
+                .ThenInclude(e => e.Users)
+                .FirstOrDefault(e => e.Id == id);
 
             if (board == null)
             {

@@ -3,4 +3,5 @@ export class Assignment{
   Title:string | undefined
   Description:any | undefined
   AssignedUserId:number | undefined
+  ColumnId:number | undefined
 }

@@ -5,4 +5,5 @@ export class Column{
   Title:string | undefined
   Description:string | undefined
   Assignments:Array<Assignment> | undefined
+  BoardId:number | undefined
 }
