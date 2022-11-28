@@ -12,7 +12,7 @@ export class ColumnService {
 
   constructor(private http: HttpClient) { }
 
-  // PostColumnToBoard():Observable<Column>{
-  //   return this.http.post<Column>(this.url + )
-  // }
+  PostColumnToBoard(column:Column){
+    return this.http.post<Column>(this.url,column)
+  }
 }

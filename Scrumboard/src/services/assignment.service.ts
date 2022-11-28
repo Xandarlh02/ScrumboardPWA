@@ -12,7 +12,7 @@ export class AssignmentService {
 
   constructor(private http: HttpClient) { }
 
-  // PostAssignmentToColumn():Observable<Assignment>{
-  //   return this.http.post<Assignment>(this.url + )
-  // }
+  PostAssignmentToColumn(assignment:Assignment){
+    return this.http.post<Assignment>(this.url,assignment )
+  }
 }
