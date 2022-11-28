@@ -1,7 +1,7 @@
 export class Assignment{
-  Id:number | undefined
-  Title:string | undefined
-  Description:any | undefined
-  AssignedUserId:number | undefined
-  ColumnId:number | undefined
+  id:number | undefined
+  title:string | undefined
+  description:any | undefined
+  assignedUserId:number | undefined
+  columnId:number | undefined
 }

@@ -1,10 +1,5 @@
 
-
-<div *ngFor="let column of board.Columns">
-        <h1>{{ column.Title }}</h1>
-    <!-- <div>
-        <div *ngFor="let item of column.Assignments" >
-            {{ item }}
-        </div>
-    </div> -->
-</div>               
+<div cdkDropList [cdkDropListData]="list" *ngFor="let list of board.columns">
+    <h1>{{list.title}}</h1>
+    <div cdkDrag [cdkDragData]="item" *ngFor="let item of list.assignments">{{item.title}}</div>
+</div>

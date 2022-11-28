@@ -1,9 +1,8 @@
+import { Column } from './../../models/column';
 import { BoardService } from './../../services/board.service';
 import { Component, OnInit } from '@angular/core';
-import {TreeNode} from 'primeng/api';
-import {TreeDragDropService} from 'primeng/api';
-import {MessageService} from 'primeng/api';
 import { Board } from 'src/models/board';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 
 @Component({
@@ -20,7 +19,7 @@ export class ScrumboardComponent implements OnInit {
   ngOnInit(): void {
     this.boardService.GetBoard(3).subscribe( e => {
       this.board = e;
-      console.log(e)
+      console.log(this.board)
     })
     
   }
