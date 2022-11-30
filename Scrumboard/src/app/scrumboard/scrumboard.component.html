@@ -1,5 +1,7 @@
 
-<div cdkDropList [cdkDropListData]="list" *ngFor="let list of board.columns">
-    <h1>{{list.title}}</h1>
-    <div cdkDrag [cdkDragData]="item" *ngFor="let item of list.assignments">{{item.title}}</div>
+<div *ngFor="let column of board.columns">
+    <h2>{{column.title}}</h2>
+    <div class="box" cdkDropList [cdkDropListData]="column">
+        <div *ngFor="let item of column.assignments" cdkDrag (cdkDropListDropped)="drop(item.id)">{{item.title}}</div>
+    </div>
 </div>

@@ -17,10 +17,14 @@ export class ScrumboardComponent implements OnInit {
   public board = new Board();
 
   ngOnInit(): void {
-    this.boardService.GetBoard(3).subscribe( e => {
+    this.boardService.GetBoard(1).subscribe( e => {
       this.board = e;
       console.log(this.board)
     })
+    
+  }
+  drop(id:number) {
+    console.log('skiftet')
     
   }
 
