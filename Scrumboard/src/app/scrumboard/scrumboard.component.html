@@ -1,7 +1,24 @@
 
-<div *ngFor="let column of board.columns">
-    <h2>{{column.title}}</h2>
-    <div class="box" cdkDropList [cdkDropListData]="column">
-        <div *ngFor="let item of column.assignments" cdkDrag (cdkDropListDropped)="drop(item.id)">{{item.title}}</div>
+<div class="root">
+    <div class="board">
+        <div class="board-wrapper">
+            <div class="board-columns">
+
+                <div cdkDropListOrientation="horizontal" class="board-columns">
+                    <div cdkDragLockAxis="x" class="board-column"  *ngFor="let column of board.columns">
+                        <div class="column-title" cdkDragHandle>
+                            <h2>{{ column.title }}</h2>
+                        </div>
+                        
+                        <div class="tasks-container" id="{{column.id}}" [cdkDropListConnectedTo]="idsArray" cdkDropList [cdkDropListData]="column.assignments" (cdkDropListDropped)="drop($event, column.id)">
+                            <div class="task" *ngFor="let item of column.assignments" cdkDrag>
+                                {{ item.title }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+

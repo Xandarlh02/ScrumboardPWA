@@ -1,3 +1,4 @@
+import { Assignment } from './../../models/assignment';
 import { Column } from './../../models/column';
 import { BoardService } from './../../services/board.service';
 import { Component, OnInit } from '@angular/core';
@@ -16,16 +17,31 @@ export class ScrumboardComponent implements OnInit {
 
   public board = new Board();
 
+  idsArray:string[] = []
+
   ngOnInit(): void {
-    this.boardService.GetBoard(1).subscribe( e => {
+    this.boardService.GetBoard(3).subscribe( e => {
       this.board = e;
       console.log(this.board)
+
+      e.columns.forEach(element => {
+        this.idsArray.push(element.id.toString())
+      });
+      console.log(this.idsArray)
+
     })
     
   }
-  drop(id:number) {
-    console.log('skiftet')
-    
+
+  public drop(event: CdkDragDrop<Assignment[]>, droppedToColumnId:number): void {
+    console.log(droppedToColumnId)
+    console.log()
+    console.log(event)
+    console.log("" + event.previousContainer.id)
+
+    console.log("Prev index in array: " + event.previousIndex)
+
+    console.log(event.container.data[event.previousIndex].title)
   }
 
 }

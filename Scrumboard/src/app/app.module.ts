@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 //Mat
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatCardModule} from '@angular/material/card';
 
 import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -28,7 +29,7 @@ import { environment } from '../environments/environment';
 
     //Mat
     DragDropModule,
-
+    MatCardModule,
 
     HttpClientModule,
   ],

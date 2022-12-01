@@ -1,9 +1,9 @@
 import { Assignment } from './assignment';
 
 export class Column{
-  id:number | undefined
+  id!:number
   title:string | undefined
   description:string | undefined
-  assignments:Array<Assignment> | undefined
+  assignments!:Array<Assignment>
   boardId:number | undefined
 }
