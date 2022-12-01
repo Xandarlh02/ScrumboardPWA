@@ -47,7 +47,7 @@ export class ScrumboardComponent implements OnInit {
     let assignment = event.previousContainer.data[event.previousIndex]
 
     this.assignmentService.MoveAssignment(assignment,droppedToColumnId).subscribe( e => {
-      this.GetBoard();
+      // this.GetBoard();
     });
 
     
