@@ -34,20 +34,13 @@ export class ScrumboardComponent implements OnInit {
   }
 
   public drop(event: CdkDragDrop<Assignment[]>, droppedToColumnId:number): void {
-    // console.log(droppedToColumnId)
-    // console.log()
-    // console.log(event)
-    // console.log("" + event.previousContainer.id)
 
-    // console.log("Prev index in array: " + event.previousIndex)
+    //Id of the column you are moving to
+    console.log(droppedToColumnId)
 
-    // console.log(event.container.data[event.previousIndex].title)
-
-    //console.log(event.item.data)
-
-    console.log("Fra denne: " +event.previousContainer.data)
-    console.log("Til denne: " +event.container.data)
-
+    //The moved object
+    console.log(event.previousContainer.data[event.previousIndex].title)
+    
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
