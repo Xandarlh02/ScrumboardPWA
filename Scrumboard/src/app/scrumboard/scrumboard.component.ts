@@ -1,3 +1,4 @@
+import { AssignmentService } from './../../services/assignment.service';
 import { Assignment } from './../../models/assignment';
 import { Column } from './../../models/column';
 import { BoardService } from './../../services/board.service';
@@ -13,13 +14,18 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 })
 export class ScrumboardComponent implements OnInit {
 
-  constructor(private boardService: BoardService) { }
+  constructor(private boardService: BoardService, private assignmentService:AssignmentService) { }
 
   public board = new Board();
 
   idsArray:string[] = []
 
   ngOnInit(): void {
+    this.GetBoard();
+    
+  }
+
+  GetBoard(){
     this.boardService.GetBoard(3).subscribe( e => {
       this.board = e;
       console.log(this.board)
@@ -30,7 +36,6 @@ export class ScrumboardComponent implements OnInit {
       console.log(this.idsArray)
 
     })
-    
   }
 
   public drop(event: CdkDragDrop<Assignment[]>, droppedToColumnId:number): void {
@@ -39,7 +44,12 @@ export class ScrumboardComponent implements OnInit {
     console.log(droppedToColumnId)
 
     //The moved object
-    console.log(event.previousContainer.data[event.previousIndex].title)
+    let assignment = event.previousContainer.data[event.previousIndex]
+
+    this.assignmentService.MoveAssignment(assignment,droppedToColumnId).subscribe( e => {
+      this.GetBoard();
+    });
+
     
     if (event.previousContainer === event.container) {
       moveItemInArray(

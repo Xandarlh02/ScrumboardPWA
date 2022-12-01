@@ -17,7 +17,7 @@ export class AssignmentService {
   }
 
   MoveAssignment(assignment:Assignment, newColumnId:number){
-    let currentColumnId = assignment.id
-    return this.http.put<Assignment>(this.url,assignment )
+    assignment.columnId = newColumnId
+    return this.http.put<Assignment>(this.url + assignment.id, assignment )
   }
 }
