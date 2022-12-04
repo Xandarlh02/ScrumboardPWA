@@ -1,3 +1,4 @@
+import { User } from './../../models/user';
 import { UserService } from './../../services/user.service';
 import { AssignmentService } from './../../services/assignment.service';
 import { Assignment } from './../../models/assignment';
@@ -6,6 +7,7 @@ import { BoardService } from './../../services/board.service';
 import { Component, OnInit } from '@angular/core';
 import { Board } from 'src/models/board';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { APP_BASE_HREF } from '@angular/common';
 
 
 @Component({
@@ -20,6 +22,7 @@ export class ScrumboardComponent implements OnInit {
   public board = new Board();
 
   idsArray:string[] = []
+  users:any
 
   ngOnInit(): void {
     this.GetBoard();
@@ -28,7 +31,7 @@ export class ScrumboardComponent implements OnInit {
   }
 
   GetBoard(){
-      this.boardService.GetBoard(1).subscribe( e => {
+      this.boardService.GetBoard(5).subscribe( e => {
       this.board = e;
 
       //This adds all the column ids to a list to make it possible to move the assignments withing the columns
@@ -39,19 +42,22 @@ export class ScrumboardComponent implements OnInit {
     error => {
       //Adding a new board if one doesnt already exist
       this.boardService.PostBoard().subscribe( e => {
-        
+        location.reload();
       })
     })
   }
 
   GetUsers(){
     this.userService.GetAllUsers().subscribe(e => {
-      console.log(e)
+      this.users = e
     })
   }
 
-  AddAssignment(){
-
+  AddAssignment(title:string, description:string, columnId:number){
+    //Creating new assignment based on the values from the user
+    let assignment = new Assignment()
+    assignment.title = title, assignment.description = description, assignment.columnId = columnId
+    this.assignmentService.PostAssignmentToColumn(assignment)
   }
 
   MoveAssignment(event: CdkDragDrop<Assignment[]>, droppedToColumnId:number): void {
