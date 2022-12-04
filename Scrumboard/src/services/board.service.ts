@@ -17,4 +17,10 @@ export class BoardService {
     return this.http.get<Board>(this.url + id)
   }
 
+  PostBoard(){
+    let board = new Board()
+    board.title = "New Board"
+    return this.http.post<Board>(this.url,board)
+  }
+
 }

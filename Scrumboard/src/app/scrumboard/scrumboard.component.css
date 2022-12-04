@@ -21,6 +21,7 @@
 .board-columns {
     display: flex;
     flex-grow: 1;
+    
 }
 
 .board-column {
@@ -29,7 +30,8 @@
     flex-grow: 1;
     flex-basis: 0;
 
-    max-width: 300px;
+    width: 200px;
+    max-width: 200px;
     margin: 50px;
     padding: 25px;
 

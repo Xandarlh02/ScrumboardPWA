@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 import { AssignmentService } from './../../services/assignment.service';
 import { Assignment } from './../../models/assignment';
 import { Column } from './../../models/column';
@@ -14,7 +15,7 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 })
 export class ScrumboardComponent implements OnInit {
 
-  constructor(private boardService: BoardService, private assignmentService:AssignmentService) { }
+  constructor(private boardService: BoardService, private assignmentService:AssignmentService, private userService:UserService) { }
 
   public board = new Board();
 
@@ -22,23 +23,38 @@ export class ScrumboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.GetBoard();
+    this.GetUsers();
     
   }
 
   GetBoard(){
-    this.boardService.GetBoard(3).subscribe( e => {
+      this.boardService.GetBoard(1).subscribe( e => {
       this.board = e;
-      console.log(this.board)
 
+      //This adds all the column ids to a list to make it possible to move the assignments withing the columns
       e.columns.forEach(element => {
         this.idsArray.push(element.id.toString())
       });
-      console.log(this.idsArray)
-
+    },
+    error => {
+      //Adding a new board if one doesnt already exist
+      this.boardService.PostBoard().subscribe( e => {
+        
+      })
     })
   }
 
-  public drop(event: CdkDragDrop<Assignment[]>, droppedToColumnId:number): void {
+  GetUsers(){
+    this.userService.GetAllUsers().subscribe(e => {
+      console.log(e)
+    })
+  }
+
+  AddAssignment(){
+
+  }
+
+  MoveAssignment(event: CdkDragDrop<Assignment[]>, droppedToColumnId:number): void {
 
     //Id of the column you are moving to
     console.log(droppedToColumnId)
@@ -47,10 +63,8 @@ export class ScrumboardComponent implements OnInit {
     let assignment = event.previousContainer.data[event.previousIndex]
 
     this.assignmentService.MoveAssignment(assignment,droppedToColumnId).subscribe( e => {
-      // this.GetBoard();
     });
 
-    
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,

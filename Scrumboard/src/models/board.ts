@@ -1,8 +1,8 @@
 import { Column } from './column';
 
 export class Board{
-  id:number | undefined
-  title:string | undefined
+  id!:number 
+  title!:string 
   columns!: Array<Column>;
-  ownerId:number | undefined
+  ownerId!:number
 }

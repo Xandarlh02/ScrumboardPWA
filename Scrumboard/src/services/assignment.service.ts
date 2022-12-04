@@ -12,7 +12,8 @@ export class AssignmentService {
 
   constructor(private http: HttpClient) { }
 
-  PostAssignmentToColumn(assignment:Assignment){
+  PostAssignmentToColumn(assignment:Assignment, columnId:number){
+    assignment.columnId = columnId
     return this.http.post<Assignment>(this.url,assignment )
   }
 
