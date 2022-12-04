@@ -1,6 +1,6 @@
 {
-  "name": "PWAApp",
-  "short_name": "PWAApp",
+  "name": "Scrumboard",
+  "short_name": "Scrumboard",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
