@@ -7,7 +7,6 @@ import { BoardService } from './../../services/board.service';
 import { Component, OnInit } from '@angular/core';
 import { Board } from 'src/models/board';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import { APP_BASE_HREF } from '@angular/common';
 
 
 @Component({
@@ -20,7 +19,6 @@ export class ScrumboardComponent implements OnInit {
   constructor(private boardService: BoardService, private assignmentService:AssignmentService, private userService:UserService) { }
 
   public board = new Board();
-
   idsArray:string[] = []
   users:any
 
@@ -31,7 +29,7 @@ export class ScrumboardComponent implements OnInit {
   }
 
   GetBoard(){
-      this.boardService.GetBoard(5).subscribe( e => {
+      this.boardService.GetBoard(1).subscribe( e => {
       this.board = e;
 
       //This adds all the column ids to a list to make it possible to move the assignments withing the columns
@@ -65,7 +63,7 @@ export class ScrumboardComponent implements OnInit {
     //Id of the column you are moving to
     console.log(droppedToColumnId)
 
-    //The moved object
+    //The moving assignment
     let assignment = event.previousContainer.data[event.previousIndex]
 
     this.assignmentService.MoveAssignment(assignment,droppedToColumnId).subscribe( e => {
