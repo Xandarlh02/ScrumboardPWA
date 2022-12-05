@@ -14,7 +14,7 @@
                                 <p>{{ item.title }}</p>
                             </div>
                             <div class="task">
-                                <button mat-icon-button color="primary">
+                                <button mat-icon-button color="primary" (onclick)="AddAssignment('New','Test', column.id) ">
                                     New task
                                     <mat-icon>add</mat-icon>
                                 </button>

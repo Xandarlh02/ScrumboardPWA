@@ -1,3 +1,4 @@
+import { ColumnService } from './../../services/column.service';
 import { User } from './../../models/user';
 import { UserService } from './../../services/user.service';
 import { AssignmentService } from './../../services/assignment.service';
@@ -16,7 +17,7 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 })
 export class ScrumboardComponent implements OnInit {
 
-  constructor(private boardService: BoardService, private assignmentService:AssignmentService, private userService:UserService) { }
+  constructor(private boardService: BoardService, private assignmentService:AssignmentService, private columnService:ColumnService, private userService:UserService) { }
 
   public board = new Board();
   idsArray:string[] = []
@@ -39,6 +40,7 @@ export class ScrumboardComponent implements OnInit {
     },
     error => {
       //Adding a new board if one doesnt already exist
+      //This is so you always have a board when the app starts
       this.boardService.PostBoard().subscribe( e => {
         location.reload();
       })
@@ -56,8 +58,12 @@ export class ScrumboardComponent implements OnInit {
     let assignment = new Assignment()
     assignment.title = title, assignment.description = description, assignment.columnId = columnId
     this.assignmentService.PostAssignmentToColumn(assignment)
+    console.log('hello')
+    //Updates the column with the new assignment
+    this.GetBoard();
   }
 
+  //Method for drag and drop
   MoveAssignment(event: CdkDragDrop<Assignment[]>, droppedToColumnId:number): void {
 
     //Id of the column you are moving to
@@ -69,6 +75,7 @@ export class ScrumboardComponent implements OnInit {
     this.assignmentService.MoveAssignment(assignment,droppedToColumnId).subscribe( e => {
     });
 
+    //Moves the assignments without destroying sorting, by not reloading the page on move
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -83,6 +90,15 @@ export class ScrumboardComponent implements OnInit {
         event.currentIndex
       );
     }
+  }
+
+  AddColumn(title:string, description:string, boardId:number){
+    let column = new Column()
+    column.title = title, column.description = description, column.boardId = boardId
+    this.columnService.PostColumnToBoard(column)
+
+    //Gets the board with the newest added column
+    this.GetBoard();
   }
 
 }
