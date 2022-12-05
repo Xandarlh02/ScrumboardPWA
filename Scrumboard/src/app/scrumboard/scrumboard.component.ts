@@ -8,6 +8,8 @@ import { BoardService } from './../../services/board.service';
 import { Component, OnInit } from '@angular/core';
 import { Board } from 'src/models/board';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { MatDialog } from '@angular/material/dialog';
+import { NewColumnDialogComponent } from '../new-column-dialog/new-column-dialog.component';
 
 
 @Component({
@@ -16,8 +18,9 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
   styleUrls: ['./scrumboard.component.css']
 })
 export class ScrumboardComponent implements OnInit {
+  
 
-  constructor(private boardService: BoardService, private assignmentService:AssignmentService, private columnService:ColumnService, private userService:UserService) { }
+  constructor(private boardService: BoardService, private assignmentService:AssignmentService, private userService:UserService, public dialog:MatDialog) { }
 
   public board = new Board();
   idsArray:string[] = []
@@ -57,10 +60,10 @@ export class ScrumboardComponent implements OnInit {
     //Creating new assignment based on the values from the user
     let assignment = new Assignment()
     assignment.title = title, assignment.description = description, assignment.columnId = columnId
-    this.assignmentService.PostAssignmentToColumn(assignment)
-    console.log('hello')
-    //Updates the column with the new assignment
-    this.GetBoard();
+    this.assignmentService.PostAssignmentToColumn(assignment).subscribe( e => {
+      //Updates the column with the new assignment
+      this.GetBoard();
+    })
   }
 
   //Method for drag and drop
@@ -91,14 +94,13 @@ export class ScrumboardComponent implements OnInit {
       );
     }
   }
-
-  AddColumn(title:string, description:string, boardId:number){
-    let column = new Column()
-    column.title = title, column.description = description, column.boardId = boardId
-    this.columnService.PostColumnToBoard(column)
-
-    //Gets the board with the newest added column
+  openDialog(boardId:number) {
+    let dialogRef = this.dialog.open(NewColumnDialogComponent, {
+     width: '300px',
+     data:{boardId:boardId}
+   });
+   dialogRef.afterClosed().subscribe( e => {
     this.GetBoard();
+   })
   }
-
 }

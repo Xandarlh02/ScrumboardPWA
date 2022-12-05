@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>New column</h2>
+
+<mat-dialog-content>
+    <input #title type="text" matInput  placeholder="Ex. Done">
+    <input #description type="text" matInput  placeholder="Ex. Done">
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button mat-dialog-close (click)="AddColumn(name,description,data.board.id)">Save</button>
+</mat-dialog-actions>

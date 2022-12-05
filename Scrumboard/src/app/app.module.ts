@@ -10,14 +10,15 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatToolbarModule} from '@angular/material/toolbar';
-
-
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
 
 import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ScrumboardComponent } from './scrumboard/scrumboard.component';
+import { NewColumnDialogComponent } from './new-column-dialog/new-column-dialog.component';
 
 import { environment } from '../environments/environment';
 
@@ -26,7 +27,9 @@ import { environment } from '../environments/environment';
     AppComponent,
     NavbarComponent,
     ScrumboardComponent,
+    NewColumnDialogComponent,
   ],
+  entryComponents:[NewColumnDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -40,7 +43,8 @@ import { environment } from '../environments/environment';
     MatIconModule,
     MatDividerModule,
     MatToolbarModule,
-
+    MatDialogModule,
+    MatInputModule,
     HttpClientModule,
 
   ],

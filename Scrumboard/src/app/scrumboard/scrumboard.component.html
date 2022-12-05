@@ -14,7 +14,7 @@
                                 <p>{{ item.title }}</p>
                             </div>
                             <div class="task">
-                                <button mat-icon-button color="primary" (onclick)="AddAssignment('New','Test', column.id) ">
+                                <button mat-icon-button color="primary" (click)="AddAssignment('New','Test', column.id) ">
                                     New task
                                     <mat-icon>add</mat-icon>
                                 </button>
@@ -24,7 +24,7 @@
                     <!-- "Add new column" placeholder -->
                     <div cdkDragLockAxis="x" class="board-column" style="background-color: transparent !important;">
                         <div class="tasks-container">
-                            <button mat-icon-button color="primary">
+                            <button mat-icon-button color="primary" (click)="openDialog(1)">
                                 Add new column
                                 <mat-icon>add</mat-icon>
                             </button>
