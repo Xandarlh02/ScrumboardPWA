@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>New assignment</h2>
+
+<mat-dialog-content>
+    <input matInput [(ngModel)]="title" type="text" placeholder="Ex. This should be made">
+    <input matInput [(ngModel)]="description" type="text"  placeholder="Ex. this is the description">
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button mat-dialog-close (click)="AddAssignment(title,description,data.columnId)">Save</button>
+</mat-dialog-actions>

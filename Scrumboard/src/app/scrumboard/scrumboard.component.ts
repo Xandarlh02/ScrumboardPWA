@@ -10,6 +10,7 @@ import { Board } from 'src/models/board';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { NewColumnDialogComponent } from '../new-column-dialog/new-column-dialog.component';
+import { NewAssignmentDialogComponent } from '../new-assignment-dialog/new-assignment-dialog.component';
 
 
 @Component({
@@ -56,16 +57,6 @@ export class ScrumboardComponent implements OnInit {
     })
   }
 
-  AddAssignment(title:string, description:string, columnId:number){
-    //Creating new assignment based on the values from the user
-    let assignment = new Assignment()
-    assignment.title = title, assignment.description = description, assignment.columnId = columnId
-    this.assignmentService.PostAssignmentToColumn(assignment).subscribe( e => {
-      //Updates the column with the new assignment
-      this.GetBoard();
-    })
-  }
-
   //Method for drag and drop
   MoveAssignment(event: CdkDragDrop<Assignment[]>, droppedToColumnId:number): void {
 
@@ -103,4 +94,15 @@ export class ScrumboardComponent implements OnInit {
     this.GetBoard();
    })
   }
+
+  openDialogNewAssignment(columnId:number) {
+    let dialogRef = this.dialog.open(NewAssignmentDialogComponent, {
+     width: '300px',
+     data:{columnId:columnId}
+   });
+   dialogRef.afterClosed().subscribe( e => {
+    this.GetBoard();
+   })
+  }
+
 }

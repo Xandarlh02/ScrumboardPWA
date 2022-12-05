@@ -19,8 +19,10 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ScrumboardComponent } from './scrumboard/scrumboard.component';
 import { NewColumnDialogComponent } from './new-column-dialog/new-column-dialog.component';
+import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 
 import { environment } from '../environments/environment';
+import { NewAssignmentDialogComponent } from './new-assignment-dialog/new-assignment-dialog.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { environment } from '../environments/environment';
     NavbarComponent,
     ScrumboardComponent,
     NewColumnDialogComponent,
+    NewAssignmentDialogComponent,
   ],
   entryComponents:[NewColumnDialogComponent],
   imports: [
@@ -46,7 +49,7 @@ import { environment } from '../environments/environment';
     MatDialogModule,
     MatInputModule,
     HttpClientModule,
-
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

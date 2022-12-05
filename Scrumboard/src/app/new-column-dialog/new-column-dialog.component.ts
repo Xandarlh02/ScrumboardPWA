@@ -3,12 +3,15 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Column } from 'src/models/column';
 import { ColumnService } from 'src/services/column.service';
 
+
 @Component({
   selector: 'app-new-column-dialog',
   templateUrl: './new-column-dialog.component.html',
   styleUrls: ['./new-column-dialog.component.css']
 })
 export class NewColumnDialogComponent implements OnInit {
+  title:any
+  description:any
 
   constructor(@Inject(MAT_DIALOG_DATA) public data:any, private columnService:ColumnService) { }
 

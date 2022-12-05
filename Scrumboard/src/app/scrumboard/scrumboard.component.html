@@ -14,7 +14,7 @@
                                 <p>{{ item.title }}</p>
                             </div>
                             <div class="task">
-                                <button mat-icon-button color="primary" (click)="AddAssignment('New','Test', column.id) ">
+                                <button mat-icon-button color="primary" (click)="openDialogNewAssignment(column.id)">
                                     New task
                                     <mat-icon>add</mat-icon>
                                 </button>
